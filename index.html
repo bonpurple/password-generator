@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>パスワード生成ツール</title>
+  <link rel="stylesheet" href="password-generator.css">
+</head>
+<body>
+  <div class="container">
+    <h1>パスワード生成ツール</h1>
+    <div class="card grid">
+      <div class="controls">
+        <div>
+          <div class="section-title">文字タイプ</div>
+          <div class="checkbox-group">
+            <label><input type="checkbox" id="upper" checked> 英字（大文字）</label>
+            <label><input type="checkbox" id="lower" checked> 英字（小文字）</label>
+            <label><input type="checkbox" id="number" checked> 数字</label>
+          </div>
+        </div>
+
+        <div>
+          <div class="section-title">記号</div>
+          <div class="row">
+            <label><input type="radio" name="symbolsRadio" id="symbolsOn" value="on" checked> 記号あり</label>
+            <label><input type="radio" name="symbolsRadio" id="symbolsOff" value="off"> 記号なし</label>
+          </div>
+          <div class="small" style="margin:6px 0 8px">
+            「記号あり」を選ぶと、〈記号を表示〉ボタンから使う記号を個別に選べます
+          </div>
+          <div class="symbols" id="symbolsBox" aria-label="記号選択">
+            <!-- symbols checkboxes populated by JS -->
+          </div>
+        </div>
+
+        <div>
+          <div class="section-title">文字数</div>
+          <div class="row">
+            <label><input type="radio" name="lenRadio" value="12" checked> 12文字</label>
+            <label><input type="radio" name="lenRadio" value="8"> 8文字</label>
+            <label style="align-items:center">
+              <input type="radio" name="lenRadio" id="lenCustomRadio" value="custom">
+              <input type="number" id="lenCustom" min="2" max="128" value="16" placeholder="2～128" 
+                style="width:70px; margin-left:6px; border: 2px solid #06b6d4; border-radius:6px; padding:4px;">
+              文字
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <div class="section-title">個数</div>
+          <div class="row">
+            <label><input type="radio" name="countRadio" value="10" checked> 10個</label>
+            <label><input type="radio" name="countRadio" value="50"> 50個</label>
+            <label style="align-items:center">
+              <input type="radio" name="countRadio" id="countCustomRadio" value="custom">
+              <input type="number" id="countCustom" min="1" max="1000" value="20" placeholder="1～1000"
+                style="width:90px; margin-left:6px; border: 2px solid #06b6d4; border-radius:6px; padding:4px;">
+              個
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <label style="gap:10px">
+            <input type="checkbox" id="ensureEach" checked>
+            各選択カテゴリを必ず1文字ずつ含める
+          </label>
+          <div class="small">
+            チェックすると選択した各カテゴリ（英字/数字/記号）から最低1文字は必ず含まれます
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="genBtn">生成</button>
+          <button class="ghost" id="copyAllBtn">全てコピー</button>
+          <button class="ghost" id="clearBtn">クリア</button>
+          <button class="ghost" id="downloadBtn">ダウンロード</button>
+        </div>
+
+      </div>
+
+      <div>
+        <div class="section-title">生成結果</div>
+        <div class="small" style="margin-bottom:8px">右の各行のボタンで個別コピー。複数行は改行で表示されます。</div>
+        <div class="card output" id="output" role="region" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+  <script src="password-generator.js"></script>
+</body>
+</html>
