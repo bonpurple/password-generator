@@ -11,6 +11,10 @@
 ## デモ
 [こちらのURLから閲覧できます](https://bonpurple.github.io/password-generator/)
 
+### スクリーンショット
+![PC表示](./screenshot-pc.png)
+![スマホ表示](./screenshot-mobile.png)
+
 ## 使用方法
 1. 文字タイプ（英字・数字・記号）を選択
 2. 記号を使用する場合は、「記号を表示」で個別に選択
