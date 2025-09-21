@@ -184,8 +184,9 @@
   function generateOne(length, options){
     // options は事前検証済みであることを前提に処理する
     const pools = [];
-    const letters = (options.upper ? options.upperChars : '') + (options.lower ? options.lowerChars : '');
-    if (letters) pools.push(letters);
+    // 英字（大文字/小文字）を別々のプールとして追加する（要件に対応）
+    if (options.upper) pools.push(options.upperChars);
+    if (options.lower) pools.push(options.lowerChars);
     if (options.number) pools.push(options.numberChars);
     if (options.symbols && options.symbolChars.length > 0) pools.push(options.symbolChars);
 
@@ -232,9 +233,9 @@
       };
 
       // プールの総数・中身を検証
-      const letters = (options.upper ? options.upperChars : '') + (options.lower ? options.lowerChars : '');
       const pools = [];
-      if (letters) pools.push(letters);
+      if (options.upper) pools.push(options.upperChars);
+      if (options.lower) pools.push(options.lowerChars);
       if (options.number) pools.push(options.numberChars);
       if (options.symbols && options.symbolChars.length > 0) pools.push(options.symbolChars);
 
@@ -254,9 +255,10 @@
       const length = getCharCount();
       const count = getCount();
 
-      // ensureEach のためのカテゴリ数カウント（英字は1カテゴリ）
+      // ensureEach のためのカテゴリ数カウント（大文字・小文字は別カテゴリ）
       let poolsCount = 0;
-      if (upper || lower) poolsCount++;
+      if (upper) poolsCount++;
+      if (lower) poolsCount++;
       if (number) poolsCount++;
       if (symbols && options.symbolChars.length > 0) poolsCount++;
 
@@ -312,7 +314,8 @@
 
   downloadBtn.addEventListener('click', ()=>{
     const lines = Array.from(output.querySelectorAll('.pw-text')).map(d=>d.textContent).join('\n');
-    if (!lines) { alert('ダウンロードする内容がありません。'); return; }
+    if (!lines) { alert('ダウンロードする内容がありません。'); return;
+    }
     const blob = new Blob([lines], {type:'text/plain;charset=utf-8'});
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
