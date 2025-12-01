@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ja">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -7,6 +8,7 @@
   <title>パスワード生成ツール</title>
   <link rel="stylesheet" href="password-generator.css">
 </head>
+
 <body>
   <div class="container">
     <h1>パスワード生成ツール</h1>
@@ -38,11 +40,11 @@
         <div>
           <div class="section-title">文字数</div>
           <div class="row">
-            <label><input type="radio" name="lenRadio" value="12" checked> 12文字</label>
-            <label><input type="radio" name="lenRadio" value="8"> 8文字</label>
+            <label><input type="radio" name="lenRadio" value="16" checked> 16文字</label>
+            <label><input type="radio" name="lenRadio" value="12"> 12文字</label>
             <label style="align-items:center">
               <input type="radio" name="lenRadio" id="lenCustomRadio" value="custom">
-              <input type="number" id="lenCustom" min="2" max="128" value="16" placeholder="2～128" 
+              <input type="number" id="lenCustom" min="2" max="128" value="24" placeholder="2～128"
                 style="width:70px; margin-left:6px; border: 2px solid #06b6d4; border-radius:6px; padding:4px;">
               文字
             </label>
@@ -91,4 +93,5 @@
   </div>
   <script src="password-generator.js"></script>
 </body>
+
 </html>
