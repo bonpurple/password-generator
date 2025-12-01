@@ -3,6 +3,17 @@
 すべての重要な変更点をこのファイルに記録します。  
 フォーマットは [Keep a Changelog](https://keepachangelog.com/ja/1.0.0/) に準拠しています。
 
+## [1.1.2] - 2025-12-02
+
+### Changed
+
+- UI 全体のフォントスタックを見直し、`Inter` を外して `"Yu Gothic UI"`, `"Noto Sans JP"`, `Meiryo`, `system-ui`, `sans-serif` を優先する構成に変更。  
+  ローカル環境と GitHub Pages 環境で、数字と日本語のフォント差異が出にくくなるよう調整しました。
+
+### Notes
+
+- 変更は表示フォントのみであり、パスワード生成ロジックや出力結果には影響しません。
+
 ## [1.1.1] - 2025-12-01
 
 ### Changed
