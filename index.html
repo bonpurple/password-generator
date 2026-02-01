@@ -25,15 +25,55 @@
 
         <div>
           <div class="section-title">記号</div>
+
           <div class="row">
             <label><input type="radio" name="symbolsRadio" id="symbolsOn" value="on" checked> 記号あり</label>
             <label><input type="radio" name="symbolsRadio" id="symbolsOff" value="off"> 記号なし</label>
           </div>
-          <div class="small" style="margin:6px 0 8px">
-            「記号あり」を選ぶと、〈記号を表示〉ボタンから使う記号を個別に選べます
-          </div>
-          <div class="symbols" id="symbolsBox" aria-label="記号選択">
-            <!-- symbols checkboxes populated by JS -->
+
+          <!-- ここから「記号あり」のときだけ見せる領域 -->
+          <div id="symbolsControls">
+            <!-- 記号の指定方法 -->
+            <div style="margin-top:6px">
+              <div class="section-title small">指定方法</div>
+
+              <div class="row">
+                <label>
+                  <input type="radio" name="symbolsMode" id="symbolsModeCheckbox" value="checkbox" checked>
+                  チェックボックス
+                </label>
+                <label>
+                  <input type="radio" name="symbolsMode" id="symbolsModeText" value="text">
+                  テキスト入力
+                </label>
+              </div>
+            </div>
+
+            <div class="small" style="margin:6px 0 8px">
+              チェックボックス：〈記号を表示〉ボタンから使う記号を個別に選べます。<br>
+              テキスト入力：入力した記号を「含む／除外する」で指定できます。
+            </div>
+
+            <!-- 記号テキスト入力欄（初期は非表示） -->
+            <div id="symbolsTextWrap" style="display:none">
+              <div class="row" style="margin:6px 0">
+                <label><input type="radio" name="symbolsTextMode" id="symbolsTextInclude" value="include" checked>
+                  含む</label>
+                <label><input type="radio" name="symbolsTextMode" id="symbolsTextExclude" value="exclude"> 除外する</label>
+              </div>
+
+              <input type="text" id="symbolsText" placeholder='例：@ - : / "@","-",":" など'
+                style="width:100%; border: 2px solid #06b6d4; border-radius:8px; padding:8px;" autocomplete="off"
+                inputmode="text">
+              <div class="small" style="margin-top:6px">
+                区切り（半角/全角スペース、カンマ、読点）や各種括弧・クォートは自動で解釈します。
+              </div>
+            </div>
+
+            <!-- 記号チェックボックス群（JSで中身を生成） -->
+            <div class="symbols" id="symbolsBox" aria-label="記号選択">
+              <!-- symbols checkboxes populated by JS -->
+            </div>
           </div>
         </div>
 
