@@ -493,15 +493,37 @@
     return parseInt(r, 10);
   }
 
+  // crypto.getRandomValues() を使用し、偏りのない整数乱数を返す
+  function secureRandomInt(maxExclusive) {
+    const range = 0x100000000; // Uint32 の範囲 (2^32)
+    if (
+      !Number.isInteger(maxExclusive) ||
+      maxExclusive < 1 ||
+      maxExclusive > range
+    ) {
+      throw new RangeError("乱数の範囲が不正です。");
+    }
+
+    // 単純な剰余演算による偏りを避けるため、範囲外の値は引き直す
+    const limit = range - (range % maxExclusive);
+    const values = new Uint32Array(1);
+    let value;
+    do {
+      crypto.getRandomValues(values);
+      value = values[0];
+    } while (value >= limit);
+    return value % maxExclusive;
+  }
+
   function shuffleArray(a) {
     for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
+      const j = secureRandomInt(i + 1);
       [a[i], a[j]] = [a[j], a[i]];
     }
   }
 
   function pickRandom(str) {
-    return str.charAt(Math.floor(Math.random() * str.length));
+    return str.charAt(secureRandomInt(str.length));
   }
 
   function generateOne(length, options) {
