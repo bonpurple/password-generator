@@ -295,23 +295,28 @@
     }
 
     // トークン（1文字 or ラップ）を読む
+
     function readTokenAt(str, idx) {
       const ch = str[idx];
 
-      // ",," は “カンマ記号” として1トークンにする（従来互換）
+      // ",," はカンマ記号として扱う
       if (ch === "," && idx + 1 < str.length && str[idx + 1] === ",") {
         return { value: ",", next: idx + 2 };
       }
 
-      // ラップ (open + X + close) → X
+      // 括弧・クォートで囲まれた1文字を取得
+      // ただし、中身が空白や読点の場合は
+      // ラップとして解釈しない
       if (wrapPairs.has(ch) && idx + 2 < str.length) {
         const close = wrapPairs.get(ch);
-        if (str[idx + 2] === close) {
-          return { value: str[idx + 1], next: idx + 3 };
+        const inner = str[idx + 1];
+
+        if (str[idx + 2] === close && !isSep(inner)) {
+          return { value: inner, next: idx + 3 };
         }
       }
 
-      // 単体1文字
+      // 通常の1文字として取得
       return { value: ch, next: idx + 1 };
     }
 
